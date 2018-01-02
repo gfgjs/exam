@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .divLogin{
+            width: 500px;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 100px;
+            padding: 50px;
+        }
+        form input{
+            padding: 5px 20px;
+            margin: 20px 50px;
+        }
+       #btnLogin{
+           width: 100px;
+           height: 30px;
+           margin-left: 80px;
+       }
+    </style>
+</head>
+<body>
+    <div class="divLogin">
+        <form action="" id="loginForm">
+            <h1>登录</h1>
+
+            <p>账号: <input type="text" name="txtName" id="txtName"/> </p>
+
+            <p>密码: <input type="password" name="txtPwd" id="txtPwd"/> </p>
+
+            <p><button type="button" id="btnLogin">登录</button></p>
+        </form>
+    </div>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    $("#btnLogin").click(function(){
+//        var param =  $("#loginForm").serialize(); //序列化，可以自动将表单元素，连接成name = value&name2=value2的形式
+//        console.log(param);  ajax 不在是以上字符串，所以不能使用序列化
+        $.post('/staff/login.do',{"name":$("#txtName").val(),"pwd":$("#txtPwd").val()},function(data){
+            console.log(data);
+            console.log(typeof data);
+             if(data.code==200){
+                 location.href="/index.html";
+             }else{
+                 alert("登录失败,请检查用户与密码是否正确");
+             }
+        });
+    })
+</script>
+</body>
+</html>

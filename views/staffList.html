@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<%-include header.html %>
+<h1>员工列表</h1>
+<%-include menu.html %>
+<div>
+    岗位信息:
+    <select name="selJob" id="selJob">
+        <% job.forEach(function(item){%>
+        <option value="<%=item.jobId%>"><%=item.jobName%></option>
+        <%})%>
+    </select>
+    状态
+    <select name="selState" id="selState">
+        <option value="-1">全部</option>
+        <option value="1">启用</option>
+        <option value="0">禁用</option>
+    </select>
+</div>
+<div>
+    <table>
+        <thead></thead>
+        <tbody>
+        <% job.forEach(function(item){%>
+        <tr>
+            <% for(var key in item){%>
+                <td><%=item[key] %></td>
+            <%}%>
+        </tr>
+        <%})%>
+        </tbody>
+    </table>
+    <div id="divPage"></div>
+</div>
+
+<%-include footer.html %>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        FirstDisPage();
+    })
+    function FirstDisPage(){
+
+        var count = '<%=count %>';
+        console.log(count);
+        var pageSize = 1; //默认一页一条
+        $("#divPage").html('');
+        for(var i=1;i<=parseInt(count);i++){
+            $("#divPage").append("<a>"+i+"</a>");
+        }
+    }
+</script>
+</body>
+</html>
